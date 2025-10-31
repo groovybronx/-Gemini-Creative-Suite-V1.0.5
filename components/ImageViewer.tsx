@@ -19,14 +19,18 @@ const ImageViewer: React.FC<ImageViewerProps> = ({ images, currentIndex, onClose
   const lastMousePosition = useRef({ x: 0, y: 0 });
   const imageRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [arrowContainerStyle, setArrowContainerStyle] = useState<React.CSSProperties>({});
 
-  const handlePrevious = useCallback(() => {
+
+  const handlePrevious = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
     if (currentIndex > 0) {
       onNavigate(currentIndex - 1);
     }
   }, [currentIndex, onNavigate]);
 
-  const handleNext = useCallback(() => {
+  const handleNext = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
     if (currentIndex < images.length - 1) {
       onNavigate(currentIndex + 1);
     }
@@ -39,9 +43,10 @@ const ImageViewer: React.FC<ImageViewerProps> = ({ images, currentIndex, onClose
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') {
-        handlePrevious();
+        // Mock a mouse event to stop propagation if needed, though not strictly necessary here
+        handlePrevious({ stopPropagation: () => {} } as React.MouseEvent);
       } else if (e.key === 'ArrowRight') {
-        handleNext();
+        handleNext({ stopPropagation: () => {} } as React.MouseEvent);
       } else if (e.key === 'Escape') {
         onClose();
       }
@@ -52,6 +57,39 @@ const ImageViewer: React.FC<ImageViewerProps> = ({ images, currentIndex, onClose
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [handlePrevious, handleNext, onClose]);
+
+  useEffect(() => {
+    const updatePosition = () => {
+        if (imageRef.current) {
+            const rect = imageRef.current.getBoundingClientRect();
+            setArrowContainerStyle({
+                position: 'fixed',
+                top: `${rect.top}px`,
+                left: `${rect.left}px`,
+                width: `${rect.width}px`,
+                height: `${rect.height}px`,
+                pointerEvents: 'none',
+            });
+        }
+    };
+
+    const imgEl = imageRef.current;
+    if (imgEl) {
+        if (imgEl.complete) {
+            updatePosition();
+        } else {
+            imgEl.onload = updatePosition;
+        }
+    }
+    window.addEventListener('resize', updatePosition);
+    
+    return () => {
+        if (imgEl) {
+            imgEl.onload = null;
+        }
+        window.removeEventListener('resize', updatePosition);
+    };
+  }, [currentIndex]);
 
   const handleDownload = async () => {
     try {
@@ -221,25 +259,27 @@ const ImageViewer: React.FC<ImageViewerProps> = ({ images, currentIndex, onClose
         
         {/* Navigation Arrows */}
         {images.length > 1 && (
-          <>
-            <button
-              onClick={handlePrevious}
-              disabled={currentIndex === 0}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/70 disabled:opacity-30 disabled:cursor-not-allowed transition"
-              aria-label="Previous image"
-            >
-              <ChevronLeftIcon className="w-8 h-8" />
-            </button>
-            <button
-              onClick={handleNext}
-              disabled={currentIndex === images.length - 1}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/70 disabled:opacity-30 disabled:cursor-not-allowed transition"
-              aria-label="Next image"
-            >
-              <ChevronRightIcon className="w-8 h-8" />
-            </button>
-          </>
-        )}
+            <div style={arrowContainerStyle}>
+              <button
+                onClick={handlePrevious}
+                disabled={currentIndex === 0}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/70 disabled:opacity-30 disabled:cursor-not-allowed transition"
+                style={{ pointerEvents: 'auto' }}
+                aria-label="Previous image"
+              >
+                <ChevronLeftIcon className="w-8 h-8" />
+              </button>
+              <button
+                onClick={handleNext}
+                disabled={currentIndex === images.length - 1}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/70 disabled:opacity-30 disabled:cursor-not-allowed transition"
+                style={{ pointerEvents: 'auto' }}
+                aria-label="Next image"
+              >
+                <ChevronRightIcon className="w-8 h-8" />
+              </button>
+            </div>
+          )}
 
         {/* Download Button */}
         <button

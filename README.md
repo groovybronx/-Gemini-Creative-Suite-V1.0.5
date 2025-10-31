@@ -4,39 +4,34 @@
 
 Gemini Creative Suite is a modern web application designed as a versatile and powerful interface for interacting with Google's state-of-the-art AI models. It provides users with a seamless experience for a variety of generative tasks, from conversational AI to advanced image creation and editing.
 
-The application serves as a creative partner, enabling users to brainstorm ideas with a chatbot, generate high-quality images from text prompts, and perform sophisticated edits on existing images, all within a unified and intuitive environment.
+The application serves as a creative partner, enabling users to brainstorm ideas, generate high-quality images, and perform sophisticated edits on existing images, all within a unified and intuitive environment.
 
 ## 2. Core Features
 
-### a. Multi-Model AI Chatbot
-- **Conversational AI:** Engage in dynamic, context-aware conversations with Google's Gemini models.
-- **Model Selection:** Users can choose between **Gemini 2.5 Flash** for rapid responses or **Gemini 2.5 Pro** for more complex reasoning and detailed answers.
-- **Persistent History:** Every chat is automatically saved, allowing users to resume conversations at any time.
+### a. Unified AI Chatbot & Image Generator
+- **Conversational AI:** Engage in dynamic, context-aware conversations with Google's Gemini models. You can choose between **Gemini 2.5 Flash** for rapid responses or **Gemini 2.5 Pro** for more complex reasoning.
+- **Integrated Image Generation:** Generate stunning images directly within the chat interface. A dedicated panel allows you to craft the perfect prompt and select from powerful models like **Imagen 3.0** and **Imagen 4.0**.
+- **Fine-Grained Control:** Customize your creations by specifying aspect ratios (1:1, 16:9, etc.), the number of images, and file types (JPEG/PNG).
+- **Multimedia Chat:** Upload your own images to discuss them with the AI.
+- **Persistent History:** Every chat, including text and generated images, is automatically saved as a single conversation.
 
-### b. Advanced Image Generation
-- **Multiple Imagen Models:** Generate images using a selection of powerful models, including `Imagen 3.0`, `Imagen 4.0`, `Imagen 4.0 Ultra`, and `Imagen 4.0 Fast`.
-- **Fine-Grained Control:** Users can customize their creations with a comprehensive set of parameters:
-    - **Aspect Ratio:** Choose from various formats (1:1, 16:9, 9:16, etc.).
-    - **File Type:** Output images as JPEG or PNG.
-- **Iterative Workflow:** All generations within a session are saved sequentially, creating a visual history of the creative process.
-
-### c. AI-Powered Image Analysis & Editing
+### b. AI-Powered Image Analysis & Editing
+- **Dedicated Editing Workflow:** A separate "Edit Image" view provides a focused workspace for image manipulation.
 - **Image Upload:** Users can upload their own images to analyze and edit.
-- **Gemini Analysis:** Get a detailed description and analysis of an uploaded image.
-- **Intuitive Editing:** Use simple text prompts (e.g., "add a retro filter," "remove the person in the background") to perform complex image edits powered by Gemini.
-- **Sequential Edits:** Apply edits iteratively, with each new change building upon the previous one.
+- **Gemini Analysis:** Get a detailed description and analysis of an uploaded image to inspire editing ideas.
+- **Intuitive Prompt-Based Editing:** Use simple text prompts (e.g., "add a retro filter," "make the sky dramatic") to perform complex image edits powered by Gemini.
+- **Version History:** Track your edits. The application saves each step, allowing you to view and branch from any point in your creative process.
 
-### d. Unified History & Session Management
-- **Centralized History:** All sessions—chats, image generations, and edits—are stored in a single, easily accessible history sidebar.
-- **Quick Access:** Search conversations by keyword, sort by date, or filter by favorites.
+### c. Unified History & Session Management
+- **Centralized History:** All sessions—chats and image edits—are stored in a single, easily accessible history sidebar.
+- **Quick Access:** Search conversations by keyword, sort by date, or filter by favorites to quickly find any past session.
 - **Seamless Context Switching:** Select any past session to instantly load the corresponding view and its entire history.
 
-### e. Customizable User Interface
+### d. Customizable User Interface
 - **Modern Design:** A clean, responsive interface built with Tailwind CSS.
-- **Theme Selection:** Choose from multiple themes.
-- **Unified History:** Access the complete chat and image history within the app.
-- **Dynamic Sizing:** Images and editor thumbnails automatically adjust size for optimal display.
-- **Retractable Panels:** Hide or reveal the settings and history panels with a single click to maximize the working space.
+- **Theme Selection:** Choose from multiple built-in themes (Light, Dark, High Contrast) or create your own with a detailed color picker.
+- **Flexible Layout:** Retractable panels for history and settings allow you to maximize your workspace.
+- **Intuitive Image Viewer:** View generated or edited images in a full-screen gallery with zoom, pan, and download capabilities.
 
 ## 3. Technical Architecture
 - **Frontend:** Built with **React** and **TypeScript** for a robust and type-safe user interface.

@@ -36,7 +36,11 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   useEffect(() => {
     const root = document.documentElement;
     for (const [key, value] of Object.entries(theme.colors)) {
-      root.style.setProperty(`--color-${key}`, value);
+      // Fix: The value from `Object.entries` can be inferred as `unknown`.
+      // Use a type guard to ensure the value is a string before setting the CSS property.
+      if (typeof value === 'string') {
+        root.style.setProperty(`--color-${key}`, value);
+      }
     }
     localStorage.setItem('themeName', themeName);
     if(themeName === 'custom' && customTheme) {

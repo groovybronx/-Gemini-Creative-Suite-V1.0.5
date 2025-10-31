@@ -275,10 +275,18 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ conversationId, onConversationC
                     <div className="grid grid-cols-2 gap-2">
                         {part.images.map((image, imgIndex) => (
                             <div key={imgIndex} className="relative group aspect-square">
-                                <img src={image.url} alt={`Generated image ${imgIndex + 1}`} className="w-full h-full object-contain rounded-md bg-base-bg" />
-                                <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity rounded-md">
-                                    <button onClick={() => onViewImage(part.images.map(i => i.url), imgIndex)} className="text-white font-semibold hover:underline">View</button>
-                                    <button onClick={() => onEditImage(image.url)} className="text-white font-semibold hover:underline flex items-center gap-1">
+                                <img src={image.url} alt={`Generated image ${imgIndex + 1}`} className="w-full h-full object-contain rounded-md bg-base-bg cursor-pointer" onClick={() => onViewImage(part.images.map(i => i.url), imgIndex)} />
+                                <div
+                                    onClick={() => onViewImage(part.images.map(i => i.url), imgIndex)}
+                                    className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity rounded-md cursor-pointer"
+                                >
+                                    <button 
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            onEditImage(image.url);
+                                        }} 
+                                        className="text-white font-semibold hover:underline flex items-center gap-1"
+                                    >
                                         <EditIcon className="w-4 h-4" /> Edit
                                     </button>
                                 </div>

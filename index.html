@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini Creative Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'base-bg': 'var(--color-base-bg)',
+              'component-bg': 'var(--color-component-bg)',
+              'border-color': 'var(--color-border-color)',
+              'text-primary': 'var(--color-text-primary)',
+              'text-secondary': 'var(--color-text-secondary)',
+              'accent-khaki': 'var(--color-accent-khaki)',
+              'accent-yellow': 'var(--color-accent-yellow)',
+              'accent-orange': 'var(--color-accent-orange)',
+            },
+          },
+        },
+      };
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.28.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-base-bg text-text-primary transition-colors duration-300">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

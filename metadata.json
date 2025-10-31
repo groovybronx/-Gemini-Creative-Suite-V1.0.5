@@ -1,0 +1,5 @@
+{
+  "name": " Gemini Creative Suite V1.0.5",
+  "description": "An application that allows users to chat with Google Gemini AI models and generate and edit images using Google's Imagen and Gemini models.",
+  "requestFramePermissions": []
+}
